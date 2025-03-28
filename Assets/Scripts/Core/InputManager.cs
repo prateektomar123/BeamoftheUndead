@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         
     }
+    public bool IsShootPressed() => Input.GetMouseButtonDown(0);
+    public float GetVerticalAxis() => Input.GetAxisRaw("Vertical");
+    public float GetHorizontalAxis() => Input.GetAxisRaw("Horizontal");
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // right now didnt think about the turret rotation but will plan in future in design
+    /*public bool IsQPressed() => Input.GetKey(KeyCode.Q);
+    public bool IsEPressed() => Input.GetKey(KeyCode.E);*/
 }

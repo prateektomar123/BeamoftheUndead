@@ -6,10 +6,12 @@ public class TankController : MonoBehaviour
     [SerializeField] private TankView view;   
 
     private float shootTimer;    
-    private int currentAmmo;     
+    private int currentAmmo;
 
+    private InputManager inputManager;
     private void Start()
     {
+        inputManager = ServiceLocator.Get<InputManager>();
         shootTimer = 0f;
         currentAmmo = model.ammoCapacity;
     }
@@ -23,9 +25,10 @@ public class TankController : MonoBehaviour
 
     private void HandleMovement()
     {
-        
-        float vertical = Input.GetAxisRaw("Vertical");   
-        float horizontal = Input.GetAxisRaw("Horizontal"); 
+
+        float vertical = inputManager.GetVerticalAxis();
+        float horizontal = inputManager.GetHorizontalAxis();
+
         Vector3 moveDirection = tankBase.forward * vertical;
         moveDirection.Normalize();
 
@@ -37,10 +40,10 @@ public class TankController : MonoBehaviour
     {
         // for future purpose if want to rotate the turret too...
         /*float rotation = 0f;
-        if (Input.GetKey(KeyCode.Q))
-            rotation = -1f; 
-        else if (Input.GetKey(KeyCode.E))
-            rotation = 1f; */
+        if (inputManager.IsQPressed())
+            rotation = -1f;
+        else if (inputManager.IsEPressed())
+            rotation = 1f;*/
 
 
         //view.RotateTurret(rotation, model.turretRotationSpeed);
@@ -50,7 +53,7 @@ public class TankController : MonoBehaviour
     {
         
         shootTimer -= Time.deltaTime;
-        if (Input.GetMouseButtonDown(0) && shootTimer <= 0f && currentAmmo > 0)
+        if (inputManager.IsShootPressed() && shootTimer <= 0f && currentAmmo > 0)
         {
             Shoot();
             shootTimer = model.fireRate; 
