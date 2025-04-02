@@ -4,7 +4,7 @@ public class TankController : MonoBehaviour
 {
     [SerializeField] private TankModel model;
     [SerializeField] private TankView view;
-    private BulletTypeManager bulletTypeManager; // No longer serialized
+    private BulletTypeManager bulletTypeManager; 
     [SerializeField] private Transform firePoint;
 
     private InputManager inputManager;
@@ -38,7 +38,7 @@ public class TankController : MonoBehaviour
         shootTimer = 0f;
         currentAmmo = model.ammoCapacity;
 
-        // BulletTypeManager will be set by TankSpawner
+        
         if (bulletTypeManager == null)
         {
             Debug.LogWarning("BulletTypeManager not set yet, waiting for TankSpawner...");

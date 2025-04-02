@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        // Register services immediately in Awake to ensure availability
+        
         RegisterServices();
     }
 

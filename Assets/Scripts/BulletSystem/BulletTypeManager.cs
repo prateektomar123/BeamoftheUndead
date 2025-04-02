@@ -3,13 +3,13 @@ using UnityEngine;
 public class BulletTypeManager : MonoBehaviour
 {
     [SerializeField] private BulletModel[] bulletModels;
-    private BulletPoolManager poolManager; // No longer serialized, set at runtime
+    private BulletPoolManager poolManager; 
     private int currentBulletIndex = 0;
     private bool[] unlockedBullets = new bool[4] { true, false, false, false };
 
     private void Start()
     {
-        // Defer initialization until poolManager is set
+        
         if (poolManager != null)
         {
             poolManager.SetBulletType(bulletModels[currentBulletIndex]);
@@ -23,7 +23,7 @@ public class BulletTypeManager : MonoBehaviour
     public void SetBulletPoolManager(BulletPoolManager manager)
     {
         poolManager = manager;
-        poolManager.SetBulletType(bulletModels[currentBulletIndex]); // Initialize after setting
+        poolManager.SetBulletType(bulletModels[currentBulletIndex]); 
         Debug.Log("BulletPoolManager linked to BulletTypeManager");
     }
 

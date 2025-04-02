@@ -19,7 +19,7 @@ public class BulletController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Placeholder for zombie hit (Phase 4)
+        
         Debug.Log("Bullet hit something!");
         ReturnToPool();
     }
