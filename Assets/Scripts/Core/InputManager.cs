@@ -9,6 +9,12 @@ public class InputManager : MonoBehaviour
     {
         
     }
+<<<<<<< Updated upstream
+=======
+    public bool IsShootPressed() => Input.GetKeyDown(KeyCode.Space);
+    public float GetVerticalAxis() => Input.GetAxisRaw("Vertical");
+    public float GetHorizontalAxis() => Input.GetAxisRaw("Horizontal");
+>>>>>>> Stashed changes
 
     // Update is called once per frame
     void Update()
