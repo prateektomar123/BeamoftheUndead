@@ -14,7 +14,7 @@ public class BulletController : MonoBehaviour
         lifetime = model.lifetime;
         view.UpdateVisuals(model);
         view.Move(direction, model.speed);
-        Invoke(nameof(ReturnToPool), lifetime); // Auto-return after lifetime
+        Invoke(nameof(ReturnToPool), lifetime); 
     }
 
     private void OnCollisionEnter(Collision collision)
