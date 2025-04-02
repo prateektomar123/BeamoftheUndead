@@ -15,7 +15,7 @@ MonoBehaviour:
   bulletName: Heavy Bullet
   bulletType: 2
   damage: 20
-  speed: 15
+  speed: 40
   lifetime: 3
   cost: 200
   bulletPrefab: {fileID: 8583084114772471651, guid: a888951974cb4d343a1d9f51d2ceec5a,

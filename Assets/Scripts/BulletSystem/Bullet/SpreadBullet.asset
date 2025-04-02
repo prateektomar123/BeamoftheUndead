@@ -15,7 +15,7 @@ MonoBehaviour:
   bulletName: Spread Bullet
   bulletType: 3
   damage: 8
-  speed: 20
+  speed: 40
   lifetime: 2
   cost: 150
   bulletPrefab: {fileID: 8583084114772471651, guid: 5c6e453d23410f544a28916e9afbbe0f,

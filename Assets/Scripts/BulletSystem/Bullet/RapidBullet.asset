@@ -15,7 +15,7 @@ MonoBehaviour:
   bulletName: Rapid Bullet
   bulletType: 1
   damage: 5
-  speed: 25
+  speed: 40
   lifetime: 1.5
   cost: 100
   bulletPrefab: {fileID: 8583084114772471651, guid: 10a63ff9f95d6194189bff8482c87dbb,

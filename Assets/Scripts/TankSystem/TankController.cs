@@ -4,13 +4,14 @@ public class TankController : MonoBehaviour
 {
     [SerializeField] private TankModel model;
     [SerializeField] private TankView view;
-    private BulletTypeManager bulletTypeManager; 
+    private BulletTypeManager bulletTypeManager;
     [SerializeField] private Transform firePoint;
 
     private InputManager inputManager;
     private BulletPoolManager bulletPoolManager;
     private float shootTimer;
     private int currentAmmo;
+    private Vector3 targetVelocity;
 
     private void Awake()
     {
@@ -34,11 +35,10 @@ public class TankController : MonoBehaviour
             return;
         }
 
-        
+        view.UpdateVisuals(model);
         shootTimer = 0f;
         currentAmmo = model.ammoCapacity;
 
-        
         if (bulletTypeManager == null)
         {
             Debug.LogWarning("BulletTypeManager not set yet, waiting for TankSpawner...");
@@ -52,6 +52,7 @@ public class TankController : MonoBehaviour
         HandleMovement();
         HandleTurretRotation();
         HandleShooting();
+        HandleVibration();
     }
 
     private void HandleMovement()
@@ -59,22 +60,28 @@ public class TankController : MonoBehaviour
         float vertical = inputManager.GetVerticalAxis();
         float horizontal = inputManager.GetHorizontalAxis();
 
+        
         Vector3 moveDirection = tankBase.forward * vertical;
         moveDirection.Normalize();
+        targetVelocity = Vector3.MoveTowards(targetVelocity, moveDirection * model.maxSpeed, model.acceleration * Time.deltaTime);
 
-        view.MoveTank(moveDirection, model.moveSpeed);
-        view.RotateTank(horizontal, model.rotationSpeed);
+       
+        Vector3 groundNormal = view.GetGroundNormal();
+        view.MoveTank(targetVelocity, groundNormal);
+
+        
+        view.RotateTank(horizontal, model.turnSpeed);
     }
 
     private void HandleTurretRotation()
     {
-        /*float rotation = 0f;
-        if (inputManager.IsQPressed())
-            rotation = -1f;
-        else if (inputManager.IsEPressed())
-            rotation = 1f;
+        // float rotation = 0f;
+        // if (inputManager.IsQPressed())
+        //     rotation = -1f;
+        // else if (inputManager.IsEPressed())
+        //     rotation = 1f;
 
-        view.RotateTurret(rotation, model.turretRotationSpeed);*/
+        // view.RotateTurret(rotation, model.turretRotationSpeed);
     }
 
     private void HandleShooting()
@@ -90,9 +97,14 @@ public class TankController : MonoBehaviour
         }
     }
 
+    private void HandleVibration()
+    {
+        view.VibrateTurret(model.vibrationAmplitude, model.vibrationFrequency);
+    }
+
     private void Shoot()
     {
-        /*view.PlayShootAnimation();*/
+        //view.PlayShootAnimation();
         BulletController bullet = bulletPoolManager.GetBullet(firePoint.position, firePoint.rotation);
         bullet.Initialize(firePoint.forward, bulletPoolManager);
     }
