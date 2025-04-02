@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa26ee75c243480eafe598d4fbf0299, type: 3}
   m_Name: BasicBullet
   m_EditorClassIdentifier: 
-  bulletName: Default Bullet
+  bulletName: Basic Bullet
   bulletType: 0
   damage: 10
   speed: 20

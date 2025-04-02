@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa26ee75c243480eafe598d4fbf0299, type: 3}
   m_Name: HeavyBullet
   m_EditorClassIdentifier: 
-  bulletName: Default Bullet
+  bulletName: Heavy Bullet
   bulletType: 2
   damage: 20
   speed: 15
   lifetime: 3
   cost: 200
-  bulletPrefab: {fileID: 8583084114772471651, guid: 421df8b17136244d7b62a0c705bdc5c3,
+  bulletPrefab: {fileID: 8583084114772471651, guid: a888951974cb4d343a1d9f51d2ceec5a,
     type: 3}

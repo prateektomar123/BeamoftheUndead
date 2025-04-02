@@ -3,12 +3,17 @@ using System.Collections.Generic;
 
 public class BulletPoolManager : MonoBehaviour
 {
-    [SerializeField] private BulletModel bulletModel; // Current bullet type
+    [SerializeField] private BulletModel bulletModel;
     private Queue<BulletController> bulletPool = new Queue<BulletController>();
     private int initialPoolSize = 50;
 
     private void Start()
     {
+        if (bulletModel == null)
+        {
+            Debug.LogError("BulletModel not assigned in BulletPoolManager!");
+            return;
+        }
         InitializePool();
     }
 
@@ -20,6 +25,7 @@ public class BulletPoolManager : MonoBehaviour
             bullet.gameObject.SetActive(false);
             bulletPool.Enqueue(bullet);
         }
+        Debug.Log($"Initialized pool with {initialPoolSize} {bulletModel.bulletName} bullets");
     }
 
     public BulletController GetBullet(Vector3 position, Quaternion rotation)
@@ -32,6 +38,7 @@ public class BulletPoolManager : MonoBehaviour
         else
         {
             bullet = Instantiate(bulletModel.bulletPrefab, transform).GetComponent<BulletController>();
+            Debug.Log("Pool expanded: Added new bullet");
         }
         bullet.gameObject.SetActive(true);
         bullet.transform.SetPositionAndRotation(position, rotation);
@@ -41,6 +48,7 @@ public class BulletPoolManager : MonoBehaviour
     public void ReturnBullet(BulletController bullet)
     {
         bulletPool.Enqueue(bullet);
+        Debug.Log($"Returned {bulletModel.bulletName} to pool. Pool size: {bulletPool.Count}");
     }
 
     public void SetBulletType(BulletModel newModel)
