@@ -4,11 +4,10 @@ public class TankSpawner : MonoBehaviour
 {
     [SerializeField] private TankModel[] tankModels;
     private GameObject currentTank;
-    private BulletTypeManager bulletTypeManager; 
+    private BulletTypeManager bulletTypeManager;
 
     private void Awake()
     {
-        
         bulletTypeManager = FindObjectOfType<BulletTypeManager>();
         if (bulletTypeManager == null)
         {
@@ -18,7 +17,7 @@ public class TankSpawner : MonoBehaviour
 
     private void Start()
     {
-        SpawnTank(tankModels[0]); 
+        SpawnTank(tankModels[0]);
     }
 
     public void SpawnTank(TankModel model)
@@ -27,10 +26,9 @@ public class TankSpawner : MonoBehaviour
         {
             Destroy(currentTank);
         }
-        currentTank = Instantiate(model.tankPrefab, Vector3.zero, Quaternion.identity);
+        currentTank = Instantiate(model.tankPrefab, transform.position, Quaternion.identity);
         Debug.Log($"Spawned {model.tankName}");
 
-        
         BulletPoolManager poolManager = currentTank.GetComponentInChildren<BulletPoolManager>();
         if (poolManager != null && bulletTypeManager != null)
         {
@@ -38,9 +36,11 @@ public class TankSpawner : MonoBehaviour
             TankController tankController = currentTank.GetComponent<TankController>();
             tankController.SetBulletTypeManager(bulletTypeManager);
         }
-        else
+
+        ZombiePoolManager zombieManager = FindObjectOfType<ZombiePoolManager>();
+        if (zombieManager != null)
         {
-            Debug.LogError("Failed to link BulletPoolManager or BulletTypeManager!");
+            zombieManager.SetTankTarget(currentTank.transform);
         }
     }
 

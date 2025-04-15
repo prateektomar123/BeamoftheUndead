@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1521,6 +1521,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hip Hop Dancing (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 787fafaed732b044ab7cdcb4c05d2f3a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 787fafaed732b044ab7cdcb4c05d2f3a,
         type: 3}

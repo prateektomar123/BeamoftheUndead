@@ -53,20 +53,26 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 47e73d2f6f23dc54996dc6a839e87eff, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 07d232a013673f34c980eeff7baa0307, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 100000, guid: 47e73d2f6f23dc54996dc6a839e87eff, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 47e73d2f6f23dc54996dc6a839e87eff,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 2841360831662548303}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 47e73d2f6f23dc54996dc6a839e87eff,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8319260953226096825}
   m_SourcePrefab: {fileID: 100100000, guid: 47e73d2f6f23dc54996dc6a839e87eff, type: 3}
 --- !u!1 &5749969529164726303 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 47e73d2f6f23dc54996dc6a839e87eff, type: 3}
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 47e73d2f6f23dc54996dc6a839e87eff,
+    type: 3}
   m_PrefabInstance: {fileID: 5749969529164695231}
   m_PrefabAsset: {fileID: 0}
 --- !u!64 &2841360831662548303
@@ -91,3 +97,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300004, guid: 47e73d2f6f23dc54996dc6a839e87eff, type: 3}
+--- !u!114 &8319260953226096825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5749969529164726303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

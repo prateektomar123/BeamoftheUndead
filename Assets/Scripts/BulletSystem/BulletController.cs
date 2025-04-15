@@ -14,20 +14,28 @@ public class BulletController : MonoBehaviour
         lifetime = model.lifetime;
         view.UpdateVisuals(model);
         view.Move(direction, model.speed);
-        Invoke(nameof(ReturnToPool), lifetime); 
+        gameObject.tag = "Bullet";
+        Invoke(nameof(ReturnToPool), lifetime);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        
-        Debug.Log("Bullet hit something!");
-        ReturnToPool();
+        if (collision.gameObject.CompareTag("Zombie"))
+        {
+            ReturnToPool();
+        }
+        else
+        {
+            Debug.Log("Bullet hit something else!");
+            ReturnToPool();
+        }
     }
 
     private void ReturnToPool()
     {
+        CancelInvoke(nameof(ReturnToPool));
         view.Deactivate();
-        poolManager.ReturnBullet(this);
+        poolManager.Return(this);
     }
 
     public float GetDamage() => model.damage;

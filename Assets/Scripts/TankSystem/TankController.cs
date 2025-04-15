@@ -12,6 +12,7 @@ public class TankController : MonoBehaviour
     private float shootTimer;
     private int currentAmmo;
     private Vector3 targetVelocity;
+    private ICommand shootCommand;
 
     private void Awake()
     {
@@ -43,6 +44,8 @@ public class TankController : MonoBehaviour
         {
             Debug.LogWarning("BulletTypeManager not set yet, waiting for TankSpawner...");
         }
+
+        shootCommand = new ShootCommand(view, bulletPoolManager, firePoint, 1);
     }
 
     private void Update()
@@ -60,16 +63,13 @@ public class TankController : MonoBehaviour
         float vertical = inputManager.GetVerticalAxis();
         float horizontal = inputManager.GetHorizontalAxis();
 
-        
         Vector3 moveDirection = tankBase.forward * vertical;
         moveDirection.Normalize();
         targetVelocity = Vector3.MoveTowards(targetVelocity, moveDirection * model.maxSpeed, model.acceleration * Time.deltaTime);
 
-       
         Vector3 groundNormal = view.GetGroundNormal();
         view.MoveTank(targetVelocity, groundNormal);
 
-        
         view.RotateTank(horizontal, model.turnSpeed);
     }
 
@@ -90,7 +90,7 @@ public class TankController : MonoBehaviour
 
         if (inputManager.IsShootPressed() && shootTimer <= 0f && currentAmmo > 0)
         {
-            Shoot();
+            shootCommand.Execute();
             shootTimer = model.fireRate;
             currentAmmo--;
             Debug.Log($"Ammo remaining: {currentAmmo}");
@@ -100,13 +100,6 @@ public class TankController : MonoBehaviour
     private void HandleVibration()
     {
         view.VibrateTurret(model.vibrationAmplitude, model.vibrationFrequency);
-    }
-
-    private void Shoot()
-    {
-        //view.PlayShootAnimation();
-        BulletController bullet = bulletPoolManager.GetBullet(firePoint.position, firePoint.rotation);
-        bullet.Initialize(firePoint.forward, bulletPoolManager);
     }
 
     public void SetBulletTypeManager(BulletTypeManager manager)
