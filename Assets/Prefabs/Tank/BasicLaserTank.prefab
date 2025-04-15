@@ -140,6 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709c7573972a34be0be0175b8a582430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 8583084114772471651, guid: 421df8b17136244d7b62a0c705bdc5c3, type: 3}
+  initialPoolSize: 20
   bulletModel: {fileID: 11400000, guid: e4d7b16e0240746259e67ae946f3a9c1, type: 2}
 --- !u!1 &6394272788578253665
 GameObject:
