@@ -4,54 +4,33 @@ public class TankController : MonoBehaviour
 {
     [SerializeField] private TankModel model;
     [SerializeField] private TankView view;
-    private BulletTypeManager bulletTypeManager;
     [SerializeField] private Transform firePoint;
 
-    private InputManager inputManager;
+    private InputService inputService;
     private BulletPoolManager bulletPoolManager;
+    private BulletTypeManager bulletTypeManager;
+    private ICommand shootCommand;
     private float shootTimer;
     private int currentAmmo;
     private Vector3 targetVelocity;
-    private ICommand shootCommand;
 
     private void Awake()
     {
-        try
-        {
-            inputManager = ServiceLocator.Get<InputManager>();
-        }
-        catch
-        {
-            Debug.LogWarning("InputManager not found, using fallback.");
-            inputManager = gameObject.AddComponent<InputManager>();
-        }
+        inputService = ServiceLocator.Get<InputService>();
+        bulletPoolManager = GetComponentInChildren<BulletPoolManager>();
+        bulletTypeManager = FindObjectOfType<BulletTypeManager>();
+        shootCommand = new ShootCommand(view, bulletPoolManager, firePoint, 1);
     }
 
     private void Start()
     {
-        bulletPoolManager = GetComponentInChildren<BulletPoolManager>();
-        if (bulletPoolManager == null)
-        {
-            Debug.LogError("BulletPoolManager not found in children!");
-            return;
-        }
-
         view.UpdateVisuals(model);
         shootTimer = 0f;
         currentAmmo = model.ammoCapacity;
-
-        if (bulletTypeManager == null)
-        {
-            Debug.LogWarning("BulletTypeManager not set yet, waiting for TankSpawner...");
-        }
-
-        shootCommand = new ShootCommand(view, bulletPoolManager, firePoint, 1);
     }
 
     private void Update()
     {
-        if (bulletPoolManager == null || bulletTypeManager == null) return;
-
         HandleMovement();
         HandleTurretRotation();
         HandleShooting();
@@ -60,8 +39,8 @@ public class TankController : MonoBehaviour
 
     private void HandleMovement()
     {
-        float vertical = inputManager.GetVerticalAxis();
-        float horizontal = inputManager.GetHorizontalAxis();
+        float vertical = inputService.GetVerticalAxis();
+        float horizontal = inputService.GetHorizontalAxis();
 
         Vector3 moveDirection = tankBase.forward * vertical;
         moveDirection.Normalize();
@@ -75,20 +54,20 @@ public class TankController : MonoBehaviour
 
     private void HandleTurretRotation()
     {
-        // float rotation = 0f;
-        // if (inputManager.IsQPressed())
-        //     rotation = -1f;
-        // else if (inputManager.IsEPressed())
-        //     rotation = 1f;
+        float rotation = 0f;
+        if (inputService.IsQPressed())
+            rotation = -1f;
+        else if (inputService.IsEPressed())
+            rotation = 1f;
 
-        // view.RotateTurret(rotation, model.turretRotationSpeed);
+        view.RotateTurret(rotation, model.turretRotationSpeed);
     }
 
     private void HandleShooting()
     {
         shootTimer -= Time.deltaTime;
 
-        if (inputManager.IsShootPressed() && shootTimer <= 0f && currentAmmo > 0)
+        if (inputService.IsShootPressed() && shootTimer <= 0f && currentAmmo > 0)
         {
             shootCommand.Execute();
             shootTimer = model.fireRate;

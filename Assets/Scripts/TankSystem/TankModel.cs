@@ -7,11 +7,11 @@ public class TankModel : ScriptableObject
 
     [Header("Tank Properties")]
     public string tankName = "Default Tank";
-    public float maxSpeed = 5f;          
-    public float acceleration = 10f;     
-    public float turnSpeed = 50f;        
-    public float vibrationAmplitude = 0.1f; 
-    public float vibrationFrequency = 10f;  
+    public float maxSpeed = 5f;
+    public float acceleration = 10f;
+    public float turnSpeed = 50f;
+    public float vibrationAmplitude = 0.1f;
+    public float vibrationFrequency = 10f;
 
     [Header("Turret Properties")]
     public string turretName = "Default Turret";

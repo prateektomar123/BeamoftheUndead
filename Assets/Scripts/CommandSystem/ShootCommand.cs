@@ -20,6 +20,6 @@ public class ShootCommand : ICommand
         view.PlayShootAnimation();
         BulletController bullet = bulletPoolManager.GetBullet(firePoint.position, firePoint.rotation);
         bullet.Initialize(firePoint.forward, bulletPoolManager);
-        ServiceLocator.Get<AudioManager>().PlaySound("Shoot");
+        ServiceLocator.Get<AudioService>().PlaySound("Shoot");
     }
 }

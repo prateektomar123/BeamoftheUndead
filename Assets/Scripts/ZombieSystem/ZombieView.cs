@@ -3,8 +3,6 @@ using UnityEngine;
 public class ZombieView : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    private static readonly int IsWalking = Animator.StringToHash("IsWalking");
-    private static readonly int Die = Animator.StringToHash("Die");
 
     public void UpdateVisuals(ZombieModel model)
     {
@@ -14,17 +12,17 @@ public class ZombieView : MonoBehaviour
     public void Move(Vector3 position)
     {
         transform.position = position;
-        animator.SetBool(IsWalking, true);
+        animator.SetBool("IsWalking", true);
     }
 
     public void PlayDeathAnimation()
     {
-        animator.SetTrigger(Die);
+        animator.SetTrigger("Die");
     }
 
     public void Deactivate()
     {
-        animator.SetBool(IsWalking, false);
+        animator.SetBool("IsWalking", false);
         gameObject.SetActive(false);
     }
 }

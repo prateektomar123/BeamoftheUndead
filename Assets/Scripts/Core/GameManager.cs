@@ -1,50 +1,38 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
-    private static GameManager _instance;
-    public static GameManager Instance => _instance;
+    private InputService inputService;
+    private AudioService audioService;
+    private UIService uiService;
 
-    public int Score { get; private set; } = 0;
-    public bool IsGameActive { get; private set; } = false;
-
-    private void Awake()
+    protected override void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        
-        RegisterServices();
+        base.Awake();
+        InitializeServices();
     }
 
-    private void RegisterServices()
+    private void InitializeServices()
     {
-        AudioManager audio = FindObjectOfType<AudioManager>() ?? CreateService<AudioManager>("AudioManager");
-        InputManager input = FindObjectOfType<InputManager>() ?? CreateService<InputManager>("InputManager");
-        UIManager ui = FindObjectOfType<UIManager>() ?? CreateService<UIManager>("UIManager");
+        inputService = new InputService();
+        audioService = new AudioService();
+        uiService = new UIService();
 
-        ServiceLocator.Register<AudioManager>(audio);
-        ServiceLocator.Register<InputManager>(input);
-        ServiceLocator.Register<UIManager>(ui);
+        ServiceLocator.Register(inputService);
+        ServiceLocator.Register(audioService);
+        ServiceLocator.Register(uiService);
 
-        Debug.Log("Services registered: AudioManager, InputManager, UIManager");
+        Debug.Log("GameManager initialized services.");
     }
 
-    private T CreateService<T>(string name) where T : MonoBehaviour
+    public void LoadMainMenu()
     {
-        GameObject go = new GameObject(name);
-        go.transform.SetParent(transform);
-        return go.AddComponent<T>();
+        SceneManager.LoadScene("MainMenu");
     }
 
-    public void AddScore(int points) { Score += points; Debug.Log($"Score: {Score}"); }
-    public void StartGame() { IsGameActive = true; Debug.Log("Game Started!"); }
-    public void EndGame() { IsGameActive = false; Debug.Log("Game Over!"); }
+    public void LoadMainGame()
+    {
+        SceneManager.LoadScene("MainGame");
+    }
 }
