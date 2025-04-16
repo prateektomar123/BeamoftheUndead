@@ -1,18 +1,21 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class ServiceLocator : MonoBehaviour
+public static class ServiceLocator
 {
-    // Start is called before the first frame update
-    void Start()
+    private static Dictionary<Type, object> services = new Dictionary<Type, object>();
+
+    public static void Register<T>(T service)
     {
-        
+        services[typeof(T)] = service;
     }
 
-    // Update is called once per frame
-    void Update()
+    public static T Get<T>()
     {
-        
+        if (services.TryGetValue(typeof(T), out object service))
+        {
+            return (T)service;
+        }
+        throw new Exception($"Service of type {typeof(T)} not found!");
     }
 }

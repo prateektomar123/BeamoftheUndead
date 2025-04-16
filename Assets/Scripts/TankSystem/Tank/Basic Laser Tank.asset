@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: Basic Laser Tank
   m_EditorClassIdentifier: 
   tankName: Default Tank
-  moveSpeed: 5
-  rotationSpeed: 100
+  maxSpeed: 5
+  acceleration: 10
+  turnSpeed: 5
+  vibrationAmplitude: 0.1
+  vibrationFrequency: 2
   turretName: Default Turret
   turretType: 0
-  turretRotationSpeed: 100
+  turretRotationSpeed: 10
   damage: 10
-  fireRate: 0.5
+  fireRate: 0.1
   ammoCapacity: 50
   tankPrefab: {fileID: 3515101171880872934, guid: 18bbbd2940f53174089c9fb327d50e28,
     type: 3}

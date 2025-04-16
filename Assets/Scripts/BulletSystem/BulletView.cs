@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class BulletView : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rb; // For physics-based movement
+    [SerializeField] private Rigidbody rb; 
 
     public void UpdateVisuals(BulletModel model)
     {
-        // Placeholder for visual updates (e.g., change color or scale if needed)
+       
         Debug.Log($"BulletView updated for {model.bulletName}");
     }
 

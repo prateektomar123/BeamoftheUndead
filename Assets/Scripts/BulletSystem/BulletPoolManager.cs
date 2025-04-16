@@ -1,60 +1,32 @@
 using UnityEngine;
-using System.Collections.Generic;
 
-public class BulletPoolManager : MonoBehaviour
+public class BulletPoolManager : ObjectPool<BulletController>
 {
-    [SerializeField] private BulletModel bulletModel; // Current bullet type
-    private Queue<BulletController> bulletPool = new Queue<BulletController>();
-    private int initialPoolSize = 50;
+    [SerializeField] private BulletModel bulletModel;
 
-    private void Start()
+    protected override void Start()
     {
-        InitializePool();
-    }
-
-    private void InitializePool()
-    {
-        for (int i = 0; i < initialPoolSize; i++)
+        if (bulletModel == null)
         {
-            BulletController bullet = Instantiate(bulletModel.bulletPrefab, transform).GetComponent<BulletController>();
-            bullet.gameObject.SetActive(false);
-            bulletPool.Enqueue(bullet);
+            Debug.LogError("BulletModel not assigned in BulletPoolManager!");
+            return;
         }
+        prefab = bulletModel.bulletPrefab;
+        base.Start();
     }
 
     public BulletController GetBullet(Vector3 position, Quaternion rotation)
     {
-        BulletController bullet;
-        if (bulletPool.Count > 0)
-        {
-            bullet = bulletPool.Dequeue();
-        }
-        else
-        {
-            bullet = Instantiate(bulletModel.bulletPrefab, transform).GetComponent<BulletController>();
-        }
-        bullet.gameObject.SetActive(true);
+        BulletController bullet = Get();
         bullet.transform.SetPositionAndRotation(position, rotation);
         return bullet;
-    }
-
-    public void ReturnBullet(BulletController bullet)
-    {
-        bulletPool.Enqueue(bullet);
     }
 
     public void SetBulletType(BulletModel newModel)
     {
         bulletModel = newModel;
+        prefab = bulletModel.bulletPrefab;
         ClearPool();
         InitializePool();
-    }
-
-    private void ClearPool()
-    {
-        while (bulletPool.Count > 0)
-        {
-            Destroy(bulletPool.Dequeue().gameObject);
-        }
     }
 }

@@ -61,10 +61,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6156539078805630820, guid: 12145cb3feb2d40ea9836ea7c5d016f4, type: 3}
-  - {fileID: 363954428322956263, guid: 12145cb3feb2d40ea9836ea7c5d016f4, type: 3}
-  - {fileID: -905690159841262435, guid: 12145cb3feb2d40ea9836ea7c5d016f4, type: 3}
-  - {fileID: -640421345888577198, guid: 12145cb3feb2d40ea9836ea7c5d016f4, type: 3}
+  - {fileID: 2100000, guid: 4d75fad28c8897c4f9d65647502619f0, type: 2}
+  - {fileID: 2100000, guid: 2e5c3c3a04aa8604b8abc193a5abe576, type: 2}
+  - {fileID: 2100000, guid: a7091cd13a596894e8c2ee9c5178b292, type: 2}
+  - {fileID: 2100000, guid: af3539500792fc3478200da007dae582, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,9 +98,10 @@ GameObject:
   - component: {fileID: 5565336264958097847}
   - component: {fileID: 2891927503489107788}
   - component: {fileID: 515574452253609203}
+  - component: {fileID: 4090155326285451743}
   m_Layer: 0
-  m_Name: ammo_rocketModern
-  m_TagString: Untagged
+  m_Name: Basic
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,9 +114,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8583084114772471651}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.2232708, w: 0.9747565}
+  m_LocalRotation: {x: 0, y: 0, z: 0.22326708, w: 0.9747573}
   m_LocalPosition: {x: 0, y: 0.4284, z: 0.617}
-  m_LocalScale: {x: 2.7999997, y: 2.7999997, z: 2.8}
+  m_LocalScale: {x: 3.6, y: 3.6, z: 3.6}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4492633341673046757}
@@ -133,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c770f8a997d4eb3a1621c1737160b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
+  model: {fileID: 11400000, guid: e4d7b16e0240746259e67ae946f3a9c1, type: 2}
   view: {fileID: 2891927503489107788}
 --- !u!114 &2891927503489107788
 MonoBehaviour:
@@ -175,3 +176,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &4090155326285451743
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8583084114772471651}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.005
+  m_Height: 0.037950594
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.0013977786}
